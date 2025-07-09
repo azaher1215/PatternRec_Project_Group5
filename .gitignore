@@ -211,3 +211,4 @@ convert_names_configurable.py
 CSE_455_555_Term_Project_VF.pdf
 RAW_interactions.csv
 RAW_recipes.csv
+processed_recipes.parquet

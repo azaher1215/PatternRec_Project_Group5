@@ -4,12 +4,8 @@ import torch
 import torch.nn.functional as F
 from transformers import BertTokenizer, BertModel
 from torch.utils.data import Dataset, DataLoader
-from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 import numpy as np
-
-
-
 
 def clean_text(text):
     # convert to lowercase and strip whitespace
@@ -69,7 +65,7 @@ class semantic_search_dataset(Dataset):
     def __getitem__(self, idx):
         recipe = self.recipes.iloc[idx]
 
-        # we need to create a text representation of the recipe
+        # Create comprehensive recipe text representation
         recipe_text = f"Recipe: {recipe['name']}. "
         if pd.notna(recipe['description']):
             recipe_text += f"Description: {recipe['description']}. "
@@ -77,31 +73,40 @@ class semantic_search_dataset(Dataset):
             recipe_text += f"Ingredients: {', '.join(recipe['ingredients'])}. "
         if recipe['tags']:
             recipe_text += f"Tags: {', '.join(recipe['tags'])}."
-
-        # Now we create the positive and negative queries (top five and bottom five tags)
-        positive_query = " ".join(recipe['tags'][:5])
-        negative_query = " ".join(recipe['tags'][-5:])
-
-        # Tokenize text
+        
+        # Create positive query from recipe tags
+        positive_query = " ".join(recipe['tags'][:5])  # Use first 5 tags as positive query
+        
+        # Create negative query from different recipe
+        neg_idx = np.random.choice([i for i in range(len(self)) if i != idx])
+        neg_recipe = self.recipes.iloc[neg_idx]
+        negative_query = " ".join(neg_recipe['tags'][:5])
+        
+        # Tokenize recipe text
         recipe_tokens = self.tokenizer(
             recipe_text, 
             truncation=True, 
             padding='max_length', 
-            max_length=self.max_length
+            max_length=self.max_length, 
+            return_tensors='pt'
         )
         
+        # Tokenize positive query
         pos_tokens = self.tokenizer(
             positive_query,
             truncation=True,
             padding='max_length',
-            max_length=self.max_length
+            max_length=self.max_length,
+            return_tensors='pt'
         )
         
+        # Tokenize negative query
         neg_tokens = self.tokenizer(
             negative_query,
             truncation=True,
             padding='max_length',
-            max_length=self.max_length
+            max_length=self.max_length,
+            return_tensors='pt'
         )
         
         return {
@@ -111,11 +116,40 @@ class semantic_search_dataset(Dataset):
             'recipe_id': recipe['id']
         }
 
-def contrastive_loss(recipe_emb, pos_query_emb, neg_query_emb, margin=1.0):
-    pos_sim = F.cosine_similarity(recipe_emb, pos_query_emb, dim=1)
-    neg_sim = F.cosine_similarity(recipe_emb, neg_query_emb, dim=1)
-    loss = torch.clamp(margin - pos_sim + neg_sim, min=0)
-    return loss.mean()
+class RecipeBERT(torch.nn.Module):
+    def __init__(self, bert_model_name='bert-base-uncased'):
+        super().__init__()
+        self.bert = BertModel.from_pretrained(bert_model_name)
+        self.projection = torch.nn.Linear(768, 768)
+        
+    def encode_text(self, input_ids, attention_mask):
+        outputs = self.bert(input_ids=input_ids, attention_mask=attention_mask)
+        embeddings = outputs.last_hidden_state[:, 0, :]  # [CLS] token
+        embeddings = self.projection(embeddings)
+        embeddings = F.normalize(embeddings, p=2, dim=1)
+        return embeddings
+    
+    def forward(self, recipe_tokens, query_tokens):
+        recipe_emb = self.encode_text(
+            recipe_tokens['input_ids'].squeeze(),
+            recipe_tokens['attention_mask'].squeeze()
+        )
+        query_emb = self.encode_text(
+            query_tokens['input_ids'].squeeze(),
+            query_tokens['attention_mask'].squeeze()
+        )
+        return recipe_emb, query_emb
+
+class ContrastiveLoss(torch.nn.Module):
+    def __init__(self, margin=1.0):
+        super().__init__()
+        self.margin = margin
+    
+    def forward(self, recipe_emb, pos_query_emb, neg_query_emb):
+        pos_sim = F.cosine_similarity(recipe_emb, pos_query_emb, dim=1)
+        neg_sim = F.cosine_similarity(recipe_emb, neg_query_emb, dim=1)
+        loss = torch.clamp(self.margin - pos_sim + neg_sim, min=0)
+        return loss.mean()
 
 if __name__ == '__main__':
     
@@ -142,10 +176,10 @@ if __name__ == '__main__':
     print('merged recipes and ratings saved to processed_recipes.parquet')
     # endregion 1
 
-    # region 2:     Bert model training
+    # region 2: Bert model training for semantic search
     # Bert initialization
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-    model = BertModel.from_pretrained("bert-base-uncased")
+    model = RecipeBERT()
 
     # Data Split
     train_df, test_df = train_test_split(recipes, test_size=0.2, random_state=42)
@@ -165,41 +199,24 @@ if __name__ == '__main__':
 
     #initialize optimizer
     optimizer = torch.optim.AdamW(model.parameters(), lr=2e-5)
+    criterion = ContrastiveLoss()
 
     #training loop
     num_epochs = 3
+    best_val_loss = float('inf')
+    
     for epoch in range(num_epochs):
         model.train()
         total_loss = 0
         for batch in train_dataloader:
-            # Convert tokenizer outputs to tensors and move to device
-            recipe_input_ids = torch.tensor([item['recipe']['input_ids'] for item in batch]).to(device)
-            recipe_attention_mask = torch.tensor([item['recipe']['attention_mask'] for item in batch]).to(device)
+            recipe_tokens = {k: v.to(device) for k, v in batch['recipe'].items()}
+            pos_tokens = {k: v.to(device) for k, v in batch['positive_query'].items()}
+            neg_tokens = {k: v.to(device) for k, v in batch['negative_query'].items()}
             
-            pos_input_ids = torch.tensor([item['positive_query']['input_ids'] for item in batch]).to(device)
-            pos_attention_mask = torch.tensor([item['positive_query']['attention_mask'] for item in batch]).to(device)
+            recipe_emb, pos_query_emb = model(recipe_tokens, pos_tokens)
+            _, neg_query_emb = model(recipe_tokens, neg_tokens)
             
-            neg_input_ids = torch.tensor([item['negative_query']['input_ids'] for item in batch]).to(device)
-            neg_attention_mask = torch.tensor([item['negative_query']['attention_mask'] for item in batch]).to(device)
-            
-            # Get embeddings using standard BERT
-            recipe_outputs = model(input_ids=recipe_input_ids, attention_mask=recipe_attention_mask)
-            pos_outputs = model(input_ids=pos_input_ids, attention_mask=pos_attention_mask)
-            neg_outputs = model(input_ids=neg_input_ids, attention_mask=neg_attention_mask)
-            
-            # Use [CLS] token embeddings
-            recipe_emb = recipe_outputs.last_hidden_state[:, 0, :]  # [CLS] token
-            pos_query_emb = pos_outputs.last_hidden_state[:, 0, :]
-            neg_query_emb = neg_outputs.last_hidden_state[:, 0, :]
-            
-            # Normalize embeddings
-            recipe_emb = F.normalize(recipe_emb, p=2, dim=1)
-            pos_query_emb = F.normalize(pos_query_emb, p=2, dim=1)
-            neg_query_emb = F.normalize(neg_query_emb, p=2, dim=1)
-            
-            # Calculate contrastive loss
-            loss = contrastive_loss(recipe_emb, pos_query_emb, neg_query_emb)
-            
+            loss = criterion(recipe_emb, pos_query_emb, neg_query_emb)
             total_loss += loss.item()
             loss.backward()
             optimizer.step()
@@ -211,39 +228,28 @@ if __name__ == '__main__':
         total_val_loss = 0
         with torch.no_grad():
             for batch in test_dataloader:
-                # Convert tokenizer outputs to tensors and move to device
-                recipe_input_ids = torch.tensor([item['recipe']['input_ids'] for item in batch]).to(device)
-                recipe_attention_mask = torch.tensor([item['recipe']['attention_mask'] for item in batch]).to(device)
+                recipe_tokens = {k: v.to(device) for k, v in batch['recipe'].items()}
+                pos_tokens = {k: v.to(device) for k, v in batch['positive_query'].items()}
+                neg_tokens = {k: v.to(device) for k, v in batch['negative_query'].items()}
                 
-                pos_input_ids = torch.tensor([item['positive_query']['input_ids'] for item in batch]).to(device)
-                pos_attention_mask = torch.tensor([item['positive_query']['attention_mask'] for item in batch]).to(device)
+                recipe_emb, pos_query_emb = model(recipe_tokens, pos_tokens)
+                _, neg_query_emb = model(recipe_tokens, neg_tokens)
                 
-                neg_input_ids = torch.tensor([item['negative_query']['input_ids'] for item in batch]).to(device)
-                neg_attention_mask = torch.tensor([item['negative_query']['attention_mask'] for item in batch]).to(device)
-                
-                # Get embeddings using standard BERT
-                recipe_outputs = model(input_ids=recipe_input_ids, attention_mask=recipe_attention_mask)
-                pos_outputs = model(input_ids=pos_input_ids, attention_mask=pos_attention_mask)
-                neg_outputs = model(input_ids=neg_input_ids, attention_mask=neg_attention_mask)
-                
-                # Use [CLS] token embeddings
-                recipe_emb = recipe_outputs.last_hidden_state[:, 0, :]
-                pos_query_emb = pos_outputs.last_hidden_state[:, 0, :]
-                neg_query_emb = neg_outputs.last_hidden_state[:, 0, :]
-                
-                # Normalize embeddings
-                recipe_emb = F.normalize(recipe_emb, p=2, dim=1)
-                pos_query_emb = F.normalize(pos_query_emb, p=2, dim=1)
-                neg_query_emb = F.normalize(neg_query_emb, p=2, dim=1)
-                
-                # Calculate contrastive loss
-                val_loss = contrastive_loss(recipe_emb, pos_query_emb, neg_query_emb)
-                total_val_loss += val_loss.item()
-                print(f'Epoch {epoch}, Validation Loss: {val_loss.item()}')
+                loss = criterion(recipe_emb, pos_query_emb, neg_query_emb)
+                total_val_loss += loss.item()
+                print(f'Epoch {epoch}, Validation Loss: {loss.item()}')
 
-        print(f'Epoch {epoch}, Training Loss: {total_loss/len(train_dataloader)}, Validation Loss: {total_val_loss/len(test_dataloader)}')
+        avg_train_loss = total_loss / len(train_dataloader)
+        avg_val_loss = total_val_loss / len(test_dataloader)
+        print(f'Epoch {epoch}, Training Loss: {avg_train_loss:.4f}, Validation Loss: {avg_val_loss:.4f}')
+        
+        # Save best model
+        if avg_val_loss < best_val_loss:
+            best_val_loss = avg_val_loss
+            torch.save(model.state_dict(), 'best_semantic_model.pt')
+            print('New best model saved!')
 
     #save model
-    torch.save(model.state_dict(), 'bert_model.pth')
-    print('Model saved to bert_model.pth')
+    torch.save(model.state_dict(), 'semantic_search_model.pth')
+    print('Semantic search model saved to semantic_search_model.pth')
     # endregion 2

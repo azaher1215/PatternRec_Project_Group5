@@ -1,1 +1,0 @@
-# PatternRec_Project_Group7

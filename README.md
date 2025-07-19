@@ -1,1 +1,1 @@
-# PatternRec_Project_Group7
+# Pattern Recognition Project Group 5

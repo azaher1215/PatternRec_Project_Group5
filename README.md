@@ -1,13 +1,23 @@
-# UI Pattern Project
+# CSE 555 - Introduction to Pattern Recognition
+### by: Ahmed Zaher and Saksham Lakhera
 
 ## Overview
-This project is a multi-featured application focused on food image classification, variation detection, recipe recommendation, and reporting. It leverages deep learning and NLP techniques to provide a comprehensive toolkit for food-related data analysis and user interaction.
+This project is a multi-featured application focused on food image classification, variation detection, recipe recommendation, and a report that combines the analysis and discusses the resutls. It leverages deep learning and NLP techniques to provide a comprehensive toolkit for food-related data analysis and user interaction.
 
 ## Features
 - **Image Classification:** Classify food images using pre-trained models.
 - **Variation Detection:** Detect variations in food items.
 - **Recipe Recommendation:** Recommend recipes based on user input and image analysis.
-- **Report Generation:** Generate reports based on classification and recommendation results.
+- **Report section:** View or download the scietific report that contains all the analysis .
+
+## Interactive Websitelink
+To run the website, click on [this](https://huggingface.co/spaces/PatternGroup5/pattern). 
+The website is hosted on Hugging face due to size. 
+
+## Datasets
+- The pictures used to train the CV part can be found on [dropbox](https://www.dropbox.com/scl/fo/19579q8wzr4crnox1a7dj/AIRrxlllLPTkA7lt08MMno0?rlkey=xyqtykyc6css2k644gk7ewv5f&st=i1fjkcq5&dl=0)
+- The dataset used for training the NLP section along with the final weights and a complete recipe embeddings can be found on google [drive](https://drive.google.com/drive/folders/1m6cfy4NuxIKNDBtJqm150NNN0FSUS8Np?usp=sharing).
+- Model weights data for CV and all other assets are stored in the `assets/` directory.
 
 ## Project Structure
 ```
@@ -30,26 +40,12 @@ UI_pattern/
    git clone <repo-url>
    cd UI_pattern
    ```
-2. **Create and activate the virtual environment:**
-   (Already included as `sakenv/`)
-   ```bash
-   source sakenv/bin/activate
-   ```
-3. **Install dependencies:**
+2. **Install dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
 4. **Run the application:**
-   - If using Streamlit:
+   - Using Streamlit:
      ```bash
      streamlit run Home.py
      ```
-   - Or follow the instructions in `Home.py`.
-
-## Python Version
-- Python 3.12.2
-
-## Notes
-- Model weights and NLP data are stored in the `assets/` directory.
-- Ensure you have the necessary permissions to access large files in `assets/modelWeights/` and `assets/nlp/`.
-- For best results, use the provided virtual environment and requirements file. 

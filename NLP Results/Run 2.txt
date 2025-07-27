@@ -1,0 +1,190 @@
+Run two loss 
+Epoch 1, Average Loss: 0.0241
+Epoch 2, Average Loss: 0.0031
+Epoch 3, Average Loss: 0.0061
+
+Evaluating model...
+Average loss on validation set: 0.0118
+Model saved to tag_based_bert_model.pth
+
+Query: 'chicken italian pasta'
+1. baked chicken soup
+   Combined Score: 0.727
+   Semantic Score: 0.804
+   Popularity Score: 0.026
+   Avg Rating: 4.3 (16 ratings)
+   Tags: 60-minutes-or-less, time-to-make, course, preparation, soups-stews
+   Time: 45 minutes
+   Recipe Text: Ingredients: butter all-purpose flour chicken broth cooked chicken salt pepper garlic powder italian...
+
+2. applebee s style 3 cheese chicken penne
+   Combined Score: 0.722
+   Semantic Score: 0.800
+   Popularity Score: 0.018
+   Avg Rating: 3.5 (11 ratings)
+   Tags: weeknight, 60-minutes-or-less, time-to-make, course, main-ingredient
+   Time: 45 minutes
+   Recipe Text: Ingredients: chicken breasts italian salad dressing penne pasta alfredo sauce italian cheese tomatoe...
+
+3. baked pasta with asparagus  pasta al forno con asparagi
+   Combined Score: 0.721
+   Semantic Score: 0.798
+   Popularity Score: 0.033
+   Avg Rating: 3.6 (36 ratings)
+   Tags: 60-minutes-or-less, time-to-make, course, main-ingredient, cuisine
+   Time: 50 minutes
+   Recipe Text: Ingredients: penne pasta asparagus butter chicken stock salt and pepper ricotta cheese olive oil par...
+
+
+Query: 'beef steak dinner'
+1. aussie pepper steak   steak with creamy pepper sauce
+   Combined Score: 0.705
+   Semantic Score: 0.780
+   Popularity Score: 0.033
+   Avg Rating: 4.4 (24 ratings)
+   Tags: 30-minutes-or-less, time-to-make, course, main-ingredient, preparation
+   Time: 30 minutes
+   Recipe Text: Ingredients: steak fillets butter oil flour beef stock cream steak seasoning salt & freshly ground b...
+
+2. balsamic rib eye steak with bleu cheese sauce
+   Combined Score: 0.694
+   Semantic Score: 0.769
+   Popularity Score: 0.023
+   Avg Rating: 3.9 (15 ratings)
+   Tags: time-to-make, course, main-ingredient, preparation, occasion
+   Time: 110 minutes
+   Recipe Text: Ingredients: balsamic vinegar red wine fresh ground black pepper kosher salt rib eye steaks blue che...
+
+3. beef with snow peas
+   Combined Score: 0.672
+   Semantic Score: 0.743
+   Popularity Score: 0.026
+   Avg Rating: 4.4 (15 ratings)
+   Tags: 15-minutes-or-less, time-to-make, main-ingredient, cuisine, preparation
+   Time: 15 minutes
+   Recipe Text: Ingredients: soy sauce rice wine brown sugar cornstarch vegetable oil fresh gingerroot garlic beef r...
+
+
+Query: 'vegetarian salad healthy'
+1. avocado mandarin salad
+   Combined Score: 0.774
+   Semantic Score: 0.857
+   Popularity Score: 0.026
+   Avg Rating: 5.0 (11 ratings)
+   Tags: 30-minutes-or-less, time-to-make, course, main-ingredient, preparation
+   Time: 20 minutes
+   Recipe Text: Ingredients: mandarin oranges green onion pecans pepper salad greens avocado italian salad dressing ...
+
+2. apricot orange glazed carrots with cranberries
+   Combined Score: 0.766
+   Semantic Score: 0.848
+   Popularity Score: 0.022
+   Avg Rating: 4.4 (10 ratings)
+   Tags: 30-minutes-or-less, time-to-make, course, main-ingredient, preparation
+   Time: 23 minutes
+   Recipe Text: Ingredients: carrots dried apricot dried cranberries orange juice unsalted butter brown sugar salt o...
+
+3. affordable basic restaurant style tomato and macaroni soup
+   Combined Score: 0.763
+   Semantic Score: 0.845
+   Popularity Score: 0.019
+   Avg Rating: 3.9 (10 ratings)
+   Tags: 15-minutes-or-less, time-to-make, course, main-ingredient, cuisine
+   Time: 15 minutes
+   Recipe Text: Ingredients: tomato juice water onion macaroni salt and pepper Tags: course main-ingredient cuisine ...
+
+
+Query: 'dessert chocolate cake'
+1. best ever banana cake with cream cheese frosting
+   Combined Score: 0.793
+   Semantic Score: 0.790
+   Popularity Score: 0.822
+   Avg Rating: 4.3 (1322 ratings)
+   Tags: weeknight, time-to-make, course, main-ingredient, preparation
+   Time: 75 minutes
+   Recipe Text: Ingredients: bananas lemon juice flour baking soda salt butter sugar eggs Tags: course main-ingredie...
+
+2. a 1  cherry cobbler tart   a1
+   Combined Score: 0.790
+   Semantic Score: 0.874
+   Popularity Score: 0.034
+   Avg Rating: 5.0 (20 ratings)
+   Tags: 60-minutes-or-less, time-to-make, course, preparation, sauces
+   Time: 35 minutes
+   Recipe Text: Ingredients: cherries mascarpone cheese brown sugar vanilla extract puff pastry sheet all-purpose fl...
+
+3. banana chocolate chip brownies
+   Combined Score: 0.782
+   Semantic Score: 0.866
+   Popularity Score: 0.027
+   Avg Rating: 4.5 (15 ratings)
+   Tags: 60-minutes-or-less, time-to-make, course, preparation, for-large-groups
+   Time: 55 minutes
+   Recipe Text: Ingredients: flour baking soda salt butter brown sugar chocolate chips vanilla eggs Tags: course des...
+
+
+Query: 'quick easy dinner'
+1. amanda s cheese pound cake
+   Combined Score: 0.731
+   Semantic Score: 0.802
+   Popularity Score: 0.091
+   Avg Rating: 4.4 (128 ratings)
+   Tags: time-to-make, course, cuisine, preparation, occasion
+   Time: 105 minutes
+   Recipe Text: Ingredients: butter cream cheese sugar eggs flour vanilla Tags: course cuisine occasion desserts lun...
+
+2. baby greens with mustard vinaigrette
+   Combined Score: 0.728
+   Semantic Score: 0.806
+   Popularity Score: 0.027
+   Avg Rating: 5.0 (12 ratings)
+   Tags: 60-minutes-or-less, time-to-make, course, main-ingredient, preparation
+   Time: 35 minutes
+   Recipe Text: Ingredients: eggs honey dijon mustard white pepper salt red wine vinegar extra virgin olive oil butt...
+
+3. amaretto coffee
+   Combined Score: 0.728
+   Semantic Score: 0.805
+   Popularity Score: 0.034
+   Avg Rating: 5.0 (20 ratings)
+   Tags: 15-minutes-or-less, time-to-make, course, preparation, occasion
+   Time: 5 minutes
+   Recipe Text: Ingredients: hot coffee amaretto whipped cream Tags: course occasion easy dinner-party...
+
+
+Testing semantic-only search (no popularity bias):
+============================================================
+
+Query: 'chicken italian pasta' (Semantic only)
+1. baked artichoke and pesto risotto (Semantic Score: 0.810)
+   Tags: 60-minutes-or-less, time-to-make, course, main-ingredient, cuisine
+
+2. alfredo fettuccine with chicken and broccoli (Semantic Score: 0.810)
+   Tags: time-to-make, course, main-ingredient, cuisine, preparation
+
+3. baked chicken soup (Semantic Score: 0.804)
+   Tags: 60-minutes-or-less, time-to-make, course, preparation, soups-stews
+
+
+Query: 'beef steak dinner' (Semantic only)
+1. black pepper crusted prime rib with au jus (Semantic Score: 0.811)
+   Tags: time-to-make, course, main-ingredient, preparation, occasion
+
+2. blue cheese crusted filet mignon with port wine sauce (Semantic Score: 0.797)
+   Tags: 60-minutes-or-less, time-to-make, course, main-ingredient, preparation
+
+3. balsamic marinated flank steak (Semantic Score: 0.786)
+   Tags: 60-minutes-or-less, time-to-make, course, main-ingredient, preparation
+
+
+Query: 'vegetarian salad healthy' (Semantic only)
+1. avocado mandarin salad (Semantic Score: 0.857)
+   Tags: 30-minutes-or-less, time-to-make, course, main-ingredient, preparation
+
+2. avocado   wild rice salad (Semantic Score: 0.856)
+   Tags: weeknight, time-to-make, course, main-ingredient, preparation
+
+3. apricot orange glazed carrots with cranberries (Semantic Score: 0.848)
+   Tags: 30-minutes-or-less, time-to-make, course, main-ingredient, preparation
+
+Improved search system ready for production use!

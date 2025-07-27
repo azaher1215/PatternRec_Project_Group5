@@ -37,7 +37,6 @@ PatternRec_Project_Group5/
 ├── requirements.txt/       # Package requirements to run this repo
 ├── README_huggingface.md/  # Necessary to run the project on Hugging Face
 ├── scripts/                # Scripts used to train and test the dataset
-├── NLP Results/            # Contains the results of the 
 
 
 

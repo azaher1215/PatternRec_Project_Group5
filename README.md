@@ -27,6 +27,7 @@ PatternRec_Project_Group5/
 │   ├── modelWeights/       # Pre-trained model weights (.pth)
 │   ├── images/             # report assets
 │   ├── pdf/                # report pdf
+│   ├── NLP Results/        # Contains the results of the NLP training and the semantic comparison
 │   └── nlp/                # NLP data and models
 ├── config.py               # Configuration file
 ├── Home.py                 # Main entry point (possibly Streamlit or similar)
@@ -35,7 +36,9 @@ PatternRec_Project_Group5/
 ├── utils/                  # Utility functions (layout, etc.)
 ├── requirements.txt/       # Package requirements to run this repo
 ├── README_huggingface.md/  # Necessary to run the project on Hugging Face
-├── scripts/                # Scripts used to train and test the dataset 
+├── scripts/                # Scripts used to train and test the dataset
+├── NLP Results/            # Contains the results of the 
+
 
 
 ```

@@ -1,0 +1,100 @@
+Run Three loss 
+Epoch 1, Average Loss: 0.0098
+Epoch 2, Average Loss: 0.0023
+Epoch 3, Average Loss: 0.0023
+
+Average loss on validation set: 0.0000
+Testing enhanced semantic search system with user validation...
+============================================================
+
+Query: 'chicken italian pasta'
+
+1. absolute best ever lasagna
+   Combined Score: 0.569
+   Semantic Score: 0.669
+   Popularity Score: 0.335
+   Avg Rating: 4.3 (560 ratings)
+   Tags: weeknight, time-to-make, course, main-ingredient, cuisine
+   Time: 150 minutes
+
+2. baked ziti
+   Combined Score: 0.560
+   Semantic Score: 0.756
+   Popularity Score: 0.103
+   Avg Rating: 4.5 (146 ratings)
+   Tags: 60-minutes-or-less, time-to-make, course, main-ingredient, cuisine
+   Time: 50 minutes
+
+
+Query: 'beef steak dinner'
+
+1. balsamic rib eye steak with bleu cheese sauce
+   Combined Score: 0.581
+   Semantic Score: 0.820
+   Popularity Score: 0.023
+   Avg Rating: 3.9 (15 ratings)
+   Tags: time-to-make, course, main-ingredient, preparation, occasion
+   Time: 110 minutes
+
+2. 3 packet roast
+   Combined Score: 0.576
+   Semantic Score: 0.807
+   Popularity Score: 0.039
+   Avg Rating: 4.8 (29 ratings)
+   Tags: time-to-make, course, main-ingredient, cuisine, preparation
+   Time: 485 minutes
+
+
+Query: 'vegetarian salad healthy'
+1. black bean and sweet potato salad
+   Combined Score: 0.525
+   Semantic Score: 0.738
+   Popularity Score: 0.027
+   Avg Rating: 4.9 (13 ratings)
+   Tags: 60-minutes-or-less, time-to-make, course, main-ingredient, preparation
+   Time: 40 minutes
+
+2. african spinach and peanut butter stew
+   Combined Score: 0.513
+   Semantic Score: 0.721
+   Popularity Score: 0.027
+   Avg Rating: 4.9 (13 ratings)
+   Tags: 30-minutes-or-less, time-to-make, course, main-ingredient, cuisine
+   Time: 25 minutes
+
+
+Query: 'dessert chocolate cake'
+1. whatever floats your boat  brownies
+   Combined Score: 0.669
+   Semantic Score: 0.617
+   Popularity Score: 0.789
+   Avg Rating: 4.5 (1220 ratings)
+   Tags: 60-minutes-or-less, time-to-make, course, main-ingredient, preparation
+   Time: 35 minutes
+
+2. best ever banana cake with cream cheese frosting
+   Combined Score: 0.652
+   Semantic Score: 0.580
+   Popularity Score: 0.822
+   Avg Rating: 4.3 (1322 ratings)
+   Tags: weeknight, time-to-make, course, main-ingredient, preparation
+   Time: 75 minutes
+
+
+Query: 'quick easy dinner'
+1. whatever floats your boat  brownies
+   Combined Score: 0.628
+   Semantic Score: 0.560
+   Popularity Score: 0.789
+   Avg Rating: 4.5 (1220 ratings)
+   Tags: 60-minutes-or-less, time-to-make, course, main-ingredient, preparation
+   Time: 35 minutes
+
+2. banana banana bread
+   Combined Score: 0.520
+   Semantic Score: 0.517
+   Popularity Score: 0.527
+   Avg Rating: 4.4 (847 ratings)
+   Tags: weeknight, time-to-make, course, main-ingredient, preparation
+   Time: 75 minutes
+

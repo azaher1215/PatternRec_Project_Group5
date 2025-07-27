@@ -1,0 +1,176 @@
+
+# region
+Testing enhanced semantic search system with user validation...
+============================================================
+
+Query: 'chicken italian pasta'
+1. creamy cajun chicken pasta
+   Combined Score: 0.815
+   Semantic Score: 0.756
+   Popularity Score: 0.951
+   Avg Rating: 4.5 (1448 ratings)
+   Tags: 30-minutes-or-less, time-to-make, course, main-ingredient, cuisine
+   Time: 25 minutes
+
+2. crock pot chicken with black beans   cream cheese
+   Combined Score: 0.809
+   Semantic Score: 0.741
+   Popularity Score: 0.970
+   Avg Rating: 4.2 (1579 ratings)
+   Tags: time-to-make, course, main-ingredient, preparation, 5-ingredients-or-less
+   Time: 243 minutes
+
+3. to die for crock pot roast
+   Combined Score: 0.773
+   Semantic Score: 0.676
+   Popularity Score: 1.000
+   Avg Rating: 4.3 (1601 ratings)
+   Tags: weeknight, time-to-make, course, main-ingredient, cuisine
+   Time: 545 minutes
+
+
+Query: 'beef steak dinner'
+1. to die for crock pot roast
+   Combined Score: 0.809
+   Semantic Score: 0.727
+   Popularity Score: 1.000
+   Avg Rating: 4.3 (1601 ratings)
+   Tags: weeknight, time-to-make, course, main-ingredient, cuisine
+   Time: 545 minutes
+
+2. crock pot chicken with black beans   cream cheese
+   Combined Score: 0.773
+   Semantic Score: 0.688
+   Popularity Score: 0.970
+   Avg Rating: 4.2 (1579 ratings)
+   Tags: time-to-make, course, main-ingredient, preparation, 5-ingredients-or-less
+   Time: 243 minutes
+
+3. yes  virginia there is a great meatloaf
+   Combined Score: 0.765
+   Semantic Score: 0.755
+   Popularity Score: 0.789
+   Avg Rating: 4.2 (1305 ratings)
+   Tags: time-to-make, course, main-ingredient, cuisine, preparation
+   Time: 80 minutes
+
+
+Query: 'vegetarian salad healthy'
+1. to die for crock pot roast
+   Combined Score: 0.758
+   Semantic Score: 0.654
+   Popularity Score: 1.000
+   Avg Rating: 4.3 (1601 ratings)
+   Tags: weeknight, time-to-make, course, main-ingredient, cuisine
+   Time: 545 minutes
+
+2. crock pot chicken with black beans   cream cheese
+   Combined Score: 0.706
+   Semantic Score: 0.593
+   Popularity Score: 0.970
+   Avg Rating: 4.2 (1579 ratings)
+   Tags: time-to-make, course, main-ingredient, preparation, 5-ingredients-or-less
+   Time: 243 minutes
+
+3. creamy cajun chicken pasta
+   Combined Score: 0.698
+   Semantic Score: 0.590
+   Popularity Score: 0.951
+   Avg Rating: 4.5 (1448 ratings)
+   Tags: 30-minutes-or-less, time-to-make, course, main-ingredient, cuisine
+   Time: 25 minutes
+
+
+Query: 'dessert chocolate cake'
+1. whatever floats your boat  brownies
+   Combined Score: 0.712
+   Semantic Score: 0.680
+   Popularity Score: 0.789
+   Avg Rating: 4.5 (1220 ratings)
+   Tags: 60-minutes-or-less, time-to-make, course, main-ingredient, preparation
+   Time: 35 minutes
+
+2. best ever banana cake with cream cheese frosting
+   Combined Score: 0.660
+   Semantic Score: 0.590
+   Popularity Score: 0.822
+   Avg Rating: 4.3 (1322 ratings)
+   Tags: weeknight, time-to-make, course, main-ingredient, preparation
+   Time: 75 minutes
+
+3. reeses squares   5 ingredients   no bake  reese s
+   Combined Score: 0.638
+   Semantic Score: 0.745
+   Popularity Score: 0.388
+   Avg Rating: 4.7 (596 ratings)
+   Tags: 15-minutes-or-less, time-to-make, course, main-ingredient, preparation
+   Time: 15 minutes
+
+
+Query: 'quick easy dinner'
+1. to die for crock pot roast
+   Combined Score: 0.761
+   Semantic Score: 0.659
+   Popularity Score: 1.000
+   Avg Rating: 4.3 (1601 ratings)
+   Tags: weeknight, time-to-make, course, main-ingredient, cuisine
+   Time: 545 minutes
+
+2. whatever floats your boat  brownies
+   Combined Score: 0.726
+   Semantic Score: 0.699
+   Popularity Score: 0.789
+   Avg Rating: 4.5 (1220 ratings)
+   Tags: 60-minutes-or-less, time-to-make, course, main-ingredient, preparation
+   Time: 35 minutes
+
+3. crock pot chicken with black beans   cream cheese
+   Combined Score: 0.692
+   Semantic Score: 0.573
+   Popularity Score: 0.970
+   Avg Rating: 4.2 (1579 ratings)
+   Tags: time-to-make, course, main-ingredient, preparation, 5-ingredients-or-less
+   Time: 243 minutes
+
+
+Testing API functions with different filtering options...
+============================================================
+
+1. High-quality recipes only (4.0+ rating, 20+ ratings):
+Loading pre-computed recipe scores...
+Loaded scores for 231630 recipes
+Loading pre-computed recipe statistics...
+Loaded statistics for 231630 recipes
+Loading pre-computed recipe embeddings...
+Loaded 231637 recipe embeddings
+1. creamy cajun chicken pasta (Rating: 4.5, 1448 ratings)
+2. crock pot chicken with black beans   cream cheese (Rating: 4.2, 1579 ratings)
+3. to die for crock pot roast (Rating: 4.3, 1601 ratings)
+
+2. Any decent recipe (3.0+ rating, 5+ ratings):
+1. creamy cajun chicken pasta (Rating: 4.5, 1448 ratings)
+2. crock pot chicken with black beans   cream cheese (Rating: 4.2, 1579 ratings)
+3. to die for crock pot roast (Rating: 4.3, 1601 ratings)
+
+3. Semantic similarity only (no popularity bias):
+1. carrabba s chicken marsala (Semantic Score: 0.863)
+2. italian sausage chicken breasts (Semantic Score: 0.859)
+3. pollo alla toscana (Semantic Score: 0.856)
+
+4. Tag-based search:
+Loading pre-computed recipe scores...
+Loaded scores for 231630 recipes
+Loading pre-computed recipe statistics...
+Loaded statistics for 231630 recipes
+Loading pre-computed recipe embeddings...
+Loaded 231637 recipe embeddings
+1. creamy cajun chicken pasta (Rating: 4.5, Score: 0.815)
+2. crock pot chicken with black beans   cream cheese (Rating: 4.2, Score: 0.809)
+3. to die for crock pot roast (Rating: 4.3, Score: 0.773)
+
+Enhanced search system ready for production use!
+
+#endregion
+
+#region
+########################################################

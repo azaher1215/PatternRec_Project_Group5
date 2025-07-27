@@ -21,31 +21,37 @@ The website is hosted on Hugging face due to size.
 
 ## Project Structure
 ```
-UI_pattern/
+PatternRec_Project_Group5/
 ├── assets/
 │   ├── css/                # Stylesheets
 │   ├── modelWeights/       # Pre-trained model weights (.pth)
+│   ├── images/             # report assets
+│   ├── pdf/                # report pdf
 │   └── nlp/                # NLP data and models
 ├── config.py               # Configuration file
 ├── Home.py                 # Main entry point (possibly Streamlit or similar)
 ├── model/                  # Model code (classifier, recipe search)
 ├── pages/                  # App pages (image classification, variation detection, etc.)
-├── sakenv/                 # Python virtual environment
 ├── utils/                  # Utility functions (layout, etc.)
+├── requirements.txt/       # Package requirements to run this repo
+├── README_huggingface.md/  # Necessary to run the project on Hugging Face
+├── scripts/                # Scripts used to train and test the dataset 
+
+
 ```
 
 ## Setup Instructions
 1. **Clone the repository:**
    ```bash
    git clone <repo-url>
-   cd UI_pattern
+   cd PatternRec_Project_Group5
    ```
 2. **Install dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
 4. **Run the application:**
-   - Using Streamlit:
-     ```bash
-     streamlit run Home.py
-     ```
+   Using Streamlit:
+   ```bash
+   streamlit run Home.py
+   ```

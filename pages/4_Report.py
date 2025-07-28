@@ -10,11 +10,11 @@ def render_report():
     **Date:** July 2025
     """)
     try: 
-        with open("assets/pdf/project.pdf", "rb") as f:
+        with open("assets/pdf/project_report.pdf", "rb") as f:
             st.download_button(
                 label="📄 Download Project PDF",
                 data=f,
-                file_name="project.pdf",
+                file_name="project_report.pdf",
                 mime="application/pdf"
             )
     except FileNotFoundError:
